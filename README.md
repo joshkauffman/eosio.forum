@@ -2,7 +2,7 @@ A simple forum, messaging and voting system for EOS
 ===================================================
 
 This forum stores nothing on chain, but only allows authenticated
-messages to go through.  Off-chain tools are needed to External tools are needed to
+messages to go through.  Off-chain tools and External tools are needed too.
 
 Use case #1 - Simple chat
 -------------------------
@@ -27,7 +27,7 @@ They could create a document (Google Doc?  Markdown?), have it
 translated, and assign it a single URL. This file could state the
 different `vote_value`s available (ex: `"yes"` and `"no"`).  It could
 state the conditions or algorithm of the tally, as well as a voting
-period in terms of block heights. An optional `proposition_hash` can
+period in terms of block height. An optional `proposition_hash` can
 be put if the URL points to some potentially changing contents, to
 make sure it doesn't move during the voting period.
 
@@ -40,12 +40,12 @@ cleos push action eosio.forum vote `{"voter": "myvoteracct", "proposition": "htt
 or the equivalent on any wallet or web UI.
 
 All that information would be public, and a few tools to read the
-blockchain could be easily created, just like when upon Launch, many
+blockchain could be easily created, just like when upon launch, many
 teams created tools to validate the blockchain, in different
-languages, with an agreed conception of what we validated.
+languages, with an agreed consensus of what we validated.
 
 Therefore, when BPs trust the results of the referendum, they can take
-action, having proofs of an honest tally and honest representation of
+action, having proof of an honest tally and honest representation of
 the token holder community.
 
 
@@ -61,7 +61,7 @@ Instrumentation would then be easy to trigger alerts. Example:
 
 1. Define some `json_metadata` like this: `{"type": "alert_bps"}` or simply a string like `wake-up-bps` to be put in `content`.
 2. All BPs could have systems to watch the blockchain for such messages
-3. When 3 BPs in the top 21 sent this message, it could buzz their phone and they could gather in some agreed-upon place.
+3. When 3 BPs in the top 21 send a specific message, it could buzz everyones phones and they could gather in some agreed upon place.
 4. Many levels of messages could exist, and could change during history.
 
 
@@ -74,11 +74,11 @@ phones when certain messages arrive. This would be especially useful
 for orders that need quick actions (like account freeze).
 
 We could define some `json_metadata` with the accounts, keys and/or
-contracts to be frozen, along with refs to documents showing proofs
-and whatever docs is required to convince the BP to take the proposed
+contracts to be frozen, along with references to documents showing proofs
+and whatever documents are required to convince the BP to take the proposed
 action.  Some metadata could also be a proposed `eosio.msig`
 transaction, added by the Arbiters, ready to be reviewed and signed;
-like a `transfer`, a `code` update or whatever is the order.
+like a `transfer`, a `code` update, or whatever the order is.
 
 Having the data on-chain would mean we can easily instrument our
 systems, to quickly review and apply such orders.
