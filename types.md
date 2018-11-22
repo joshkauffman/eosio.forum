@@ -5,14 +5,14 @@ a uniform experience across UIs.
 Referendum
 -----------
 
-`referendum` should be seen as the only `type` that a Block Producer should care about.
+`referendum-v1` should be seen as the only `type` that a Block Producer should care about.
 The available responses are always `0`:`No`,`1`:`Yes`
 All UIs should display the voting buttons along with their value e.g. "0 - No"
 so that a user can easily verify their vote through any block explorer.
 
 ```
 {
-  "type":"referendum",
+  "type":"referendum-v1",
   "content":`string`
 }
 ```
@@ -20,7 +20,7 @@ so that a user can easily verify their vote through any block explorer.
 Example:
 ```
 {
-  "type":"referendum",
+  "type":"referendum-v1",
   "content":"Should EOS change its symbol to SYS?"
 }
 ```
@@ -32,7 +32,7 @@ Block Producers should act upon the result of this referendum.
 Yes/No Poll
 -----------
 
-`poll_yn` should be used for any polling that uses only Yes/No responses, and 
+`poll-yn-v1` should be used for any polling that uses only Yes/No responses, and 
 is not used for voting on actionable things. Only for polling sentiment.
 The available responses are always `0`:`No`,`1`:`Yes`
 All UIs should display the voting buttons along with their value e.g. "0 - No"
@@ -40,7 +40,7 @@ so that a user can easily verify their vote through any block explorer.
 
 ```
 {
-  "type":"poll_yn",
+  "type":"poll-yn-v1",
   "content":`string`
 }
 ```
@@ -48,7 +48,7 @@ so that a user can easily verify their vote through any block explorer.
 Example:
 ```
 {
-  "type":"poll_yn",
+  "type":"poll-yn-v1",
   "content":"Should EOS change its symbol to SYS?"
 }
 ```
@@ -60,7 +60,7 @@ not act upon the results of these polls in any official capacity.
 Yes/No/Abstain Poll
 -----------
 
-`poll_yna` should be used for any polling that uses only Yes/No/Abstain responses, and 
+`poll-yna-v1` should be used for any polling that uses only Yes/No/Abstain responses, and 
 is not used for voting on actionable things. Only for polling sentiment.
 The available responses are always `0`:`No`,`1`:`Yes`,`2`:`Abstain`
 All UIs should display the voting buttons along with their value e.g. "0 - No"
@@ -68,7 +68,7 @@ so that a user can easily verify their vote through any block explorer.
 
 ```
 {
-  "type":"poll_yna",
+  "type":"poll-yna-v1",
   "content":`string`
 }
 ```
@@ -76,7 +76,7 @@ so that a user can easily verify their vote through any block explorer.
 Example:
 ```
 {
-  "type":"poll_yna",
+  "type":"poll-yna-v1",
   "content":"Should EOS change its symbol to SYS?"
 }
 ```
@@ -90,18 +90,18 @@ to help signal community enthusiasm, while essentially delegating the decision t
 who cast a Yes or No vote. This can help for deciding if a vote should then become a
 referendum, and whether or not it might receive enough voter participation.
 
-Multi-Option Poll
+Options Poll
 -----------
 
-`multi-options` should be used for any polling that requires multiple custom responses.
-UIs should fetch the possible responses from the "options" array
+`options-v1` should be used for any polling that requires multiple custom responses (between 
+0 and 255). UIs should fetch the possible responses from the "options" array
 All UIs should push a vote value equal to the positon of the repsonse in the table, and
 should display the button as "`value` - `response`" so that a user can easily
 verify their vote through any block explorer, while lowering the amount of RAM needed to vote.
 
 ```
 {
-  "type":"multi-options",
+  "type":"options-v1",
   "content":`string`
   "options": [
     "option1"
@@ -114,12 +114,47 @@ verify their vote through any block explorer, while lowering the amount of RAM n
 Example
 ```
 {
-  "type":"multi-options",
+  "type":"options-v1",
   "content":"Should EOS change its symbol?"
   "options": [
     "EOS"
     "SYS"
     "Other"
+    ]
+}
+```
+
+Multi-Select Poll (Checkboxes)
+-----------
+
+`multi-select-v1` should be used for any polling that requires multiple possible repsonses from
+from a single user (max of 8 possible responses). UIs should fetch the possible responses from the 
+"options" array. 
+// NEED HELP TO DEFINE THIS PART (how a UI should handle this, how a user can easily verify...)
+
+```
+{
+  "type":"multi-select-v1",
+  "content":`string`
+  "options": [
+    "option1"
+    "option2"
+    "option3"
+    ]
+}
+```
+
+Example
+```
+{
+  "type":"multi-select-v1",
+  "content":"Which of these symbols should EOS change to? Select all that you like."
+  "options": [
+    "EOS"
+    "SYS"
+    "SOE"
+    "EEE"
+    "B1"
     ]
 }
 ```
